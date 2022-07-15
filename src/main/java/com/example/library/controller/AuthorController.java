@@ -38,13 +38,11 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public AuthorResponseDto getById(@PathVariable Long id) {
         return authorMapper.mapToDto(authorService.getAuthorById(id));
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public List<AuthorResponseDto> getAllAuthors() {
         return authorService.getAllAuthors()
                 .stream()
@@ -53,8 +51,7 @@ public class AuthorController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public AuthorResponseDto updateTeam(@PathVariable Long id,
+    public AuthorResponseDto updateAuthor(@PathVariable Long id,
                                       @Valid @RequestBody AuthorRequestDto authorRequestDto) {
         Author author = authorMapper.mapToModel(authorRequestDto);
         author.setId(id);
@@ -62,7 +59,6 @@ public class AuthorController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public String deleteAuthorById(@PathVariable Long id) {
         authorService.deleteAuthorById(id);
         return "Author by id " + id + " is deleted";
